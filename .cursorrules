@@ -1,0 +1,77 @@
+# 🔥 Cursor Ruleset - Código Escalável e de Alta Qualidade 🔥
+
+## 1️⃣ Estrutura Geral do Código
+- Todo código gerado deve ser **modular, reutilizável e escalável**.
+- Nomeclatura deve seguir padrões da linguagem (camelCase, PascalCase, snake_case).
+- Código altamente **legível e bem comentado**.
+- Criar **documentação clara** para cada módulo, incluindo exemplos de uso.
+- Estruturar projetos de forma **intuitiva e organizada**.
+- Sempre seguir princípios do **SOLID e Clean Code**.
+
+## 2️⃣ Frontend - Design Minimalista e UX Impecável
+- Utilizar **Atomic Design** para modularização de componentes.
+- Criar **interfaces limpas e responsivas**.
+- UX deve seguir princípios de **Usabilidade do Nielsen**.
+- A experiência do usuário (UX) é prioridade máxima.
+- Aplicar **design system** para manter consistência visual.
+- Código deve estar otimizado para **performance e acessibilidade**.
+
+## 3️⃣ Backend - Arquitetura Robusta e Segurança
+- Aplicar padrões **RESTful** ou **GraphQL**.
+- Utilizar **Arquitetura Hexagonal** ou **Clean Architecture** para máxima escalabilidade.
+- Evitar hardcoded values – sempre usar variáveis de ambiente.
+- Aplicar **camadas de segurança** em APIs:
+  - Rate limiting
+  - JWT / OAuth2 para autenticação
+  - Input sanitization para prevenir SQL Injection
+- Código deve ser **altamente testável** com testes unitários e de integração.
+
+## 4️⃣ Banco de Dados - Eficiência e Escalabilidade
+- Preferir **PostgreSQL ou MongoDB**, dependendo do caso de uso.
+- Criar **índices eficientes** para melhorar performance de queries.
+- Evitar **N+1 queries** utilizando Eager Loading.
+- Aplicar **sharding e partitioning** quando necessário.
+- Manter a **normalização**, mas saber quando **desnormalizar** para performance.
+
+## 5️⃣ Performance e Automação
+- **Priorizar caching (Redis, Memcached) para otimizar requisições.**
+- Escrever código **assíncrono sempre que possível**.
+- Monitorar performance com **logs estruturados** (ELK Stack, Prometheus).
+- Criar **pipelines CI/CD** para automação de testes e deploys.
+- Utilizar feature flags para lançamentos seguros.
+
+## 6️⃣ Melhores Práticas de Arquitetura e Engenharia de Software
+- Aplicar **Domain-Driven Design (DDD)** para organizar o código em domínios lógicos.
+- Utilizar **Event-Driven Architecture** quando necessário.
+- Criar microserviços apenas se necessário, seguindo o princípio **"Se puder ser um monólito eficiente, faça um monólito eficiente"**.
+- Aplicar princípios do **Twelve-Factor App** para desenvolvimento escalável na nuvem.
+
+## 7️⃣ Qualidade do Código e Testes
+- **Cobertura de testes mínima de 80%.**
+- Seguir padrões de código como:
+  - **ESLint / Prettier** para JavaScript/TypeScript.
+  - **Pylint / Black** para Python.
+  - **SonarQube** para análise de qualidade.
+- **Testes automatizados obrigatórios** para cada feature.
+- Aplicar **TDD (Test-Driven Development)** sempre que possível.
+
+## 8️⃣ Estrutura de Diretórios Padrão
+**Node.js / Express**
+/project-root ├── src/ │ ├── controllers/ │ ├── services/ │ ├── repositories/ │ ├── models/ │ ├── routes/ │ ├── middlewares/ │ ├── utils/ │ ├── config/ │ ├── tests/ ├── public/ ├── views/ ├── logs/ ├── docker/ ├── .env ├── .gitignore ├── README.md
+**React / Next.js**
+/project-root ├── src/ │ ├── components/ │ ├── hooks/ │ ├── context/ │ ├── pages/ │ ├── styles/ │ ├── utils/ │ ├── tests/ ├── public/ ├── .next/ ├── .env ├── .gitignore ├── README.md
+
+## 9️⃣ Segurança de Código
+- Sempre validar **entradas de usuário** antes de processá-las.
+- Nunca expor **chaves API ou credenciais** no código.
+- Aplicar **autenticação forte e criptografia** (bcrypt, AES-256).
+- Criar logs detalhados **sem vazar informações sensíveis**.
+
+## 🔟 Atualizações e Evolução do Código
+- O código deve ser **fácil de manter e evoluir**.
+- Revisões devem seguir o modelo de **Pull Requests com Code Review rigoroso**.
+- O uso de IA no desenvolvimento deve seguir a diretriz:
+  - Gerar código **de alta qualidade e explicável**.
+  - **Evitar dependência excessiva** de soluções black-box.
+
+# 🔥 SEGUIR ESSAS REGRAS É OBRIGATÓRIO 🔥
