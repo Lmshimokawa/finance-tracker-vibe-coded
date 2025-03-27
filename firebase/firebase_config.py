@@ -14,40 +14,29 @@ def initialize_firebase():
     Retorna a instância do Firestore.
     """
     if not firebase_admin._apps:
-        # Tenta carregar o arquivo de credenciais
-        cred_path = Path(__file__).parent / "serviceAccountKey.json"
-        
-        # Se o arquivo de credenciais existir, usa-o
-        if cred_path.exists():
+        try:
+            # Tenta carregar o arquivo de credenciais
+            cred_path = Path(__file__).parent / "serviceAccountKey.json"
+            
+            if not cred_path.exists():
+                raise FileNotFoundError(f"Arquivo de credenciais não encontrado em: {cred_path}")
+            
+            # Inicializa o Firebase com as credenciais do arquivo
             cred = credentials.Certificate(str(cred_path))
-            firebase_admin.initialize_app(cred)
-        # Se não existir, tenta usar as variáveis de ambiente
-        else:
-            # Configuração a partir de variáveis de ambiente
-            firebase_config = {
-                "apiKey": os.getenv("FIREBASE_API_KEY"),
-                "authDomain": os.getenv("FIREBASE_AUTH_DOMAIN"),
-                "projectId": os.getenv("FIREBASE_PROJECT_ID"),
-                "storageBucket": os.getenv("FIREBASE_STORAGE_BUCKET"),
-                "messagingSenderId": os.getenv("FIREBASE_MESSAGING_SENDER_ID"),
-                "appId": os.getenv("FIREBASE_APP_ID"),
-                "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID"),
-                "databaseURL": os.getenv("FIREBASE_DATABASE_URL"),
-            }
+            firebase_admin.initialize_app(cred, {
+                'projectId': os.getenv('FIREBASE_PROJECT_ID'),
+                'storageBucket': os.getenv('FIREBASE_STORAGE_BUCKET'),
+                'databaseURL': os.getenv('FIREBASE_DATABASE_URL')
+            })
             
-            # Se alguma variável de ambiente necessária não estiver configurada
-            if not all([firebase_config["apiKey"], firebase_config["projectId"]]):
-                print("AVISO: Configuração do Firebase incompleta nas variáveis de ambiente.")
-                return None
+            print("Firebase inicializado com sucesso!")
+            return firestore.client()
             
-            # Inicializa o Firebase com as variáveis de ambiente
-            try:
-                firebase_admin.initialize_app()
-            except ValueError as e:
-                print(f"Erro ao inicializar Firebase: {e}")
-                return None
+        except Exception as e:
+            print(f"Erro ao inicializar Firebase: {e}")
+            return None
     
-    # Retorna a instância do Firestore
+    # Se já estiver inicializado, retorna o cliente Firestore
     return firestore.client()
 
 # Função para obter uma referência ao Firestore
