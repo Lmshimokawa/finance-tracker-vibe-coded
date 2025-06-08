@@ -58,7 +58,7 @@ class AuthService:
             return None
         
         # Gerar salt aleatório para a senha
-        salt = os.urandom(32).hex()
+        salt = os.urandom(16).hex()
         
         # Hash da senha com salt
         hashed_password = AuthService._hash_password(password, salt)
@@ -253,7 +253,7 @@ class AuthService:
             return False
         
         # Gerar novo salt e hash para a nova senha
-        new_salt = os.urandom(32).hex()
+        new_salt = os.urandom(16).hex()
         hashed_new_password = AuthService._hash_password(new_password, new_salt)
         
         # Atualizar senha no Firestore
@@ -330,20 +330,28 @@ class AuthService:
     @staticmethod
     def _hash_password(password: str, salt: str) -> str:
         """
-        Gera um hash seguro para a senha.
-        
+        Gera um hash seguro para a senha utilizando PBKDF2-HMAC.
+
         Args:
             password: Senha em texto plano
-            salt: Salt para adicionar à senha
-            
+            salt: Salt em formato hexadecimal
+
         Returns:
-            Hash da senha com salt
+            Hash da senha em formato hexadecimal
         """
-        # Concatenar senha e salt
-        password_salt = password + salt
-        
-        # Usar SHA-256 para o hash
-        return hashlib.sha256(password_salt.encode()).hexdigest()
+        # Converte o salt de hexadecimal para bytes
+        salt_bytes = bytes.fromhex(salt)
+
+        # Usa PBKDF2-HMAC-SHA256 para gerar o hash
+        hash_bytes = hashlib.pbkdf2_hmac(
+            "sha256",
+            password.encode(),
+            salt_bytes,
+            100_000,
+        )
+
+        # Retorna o hash em formato hexadecimal
+        return hash_bytes.hex()
     
     @staticmethod
     def verify_token(token: str) -> Optional[Dict]:
