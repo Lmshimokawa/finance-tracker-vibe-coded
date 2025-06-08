@@ -114,6 +114,7 @@ A aplicação utiliza Firebase Authentication para gerenciar usuários e protege
 
 Para executar testes:
 ```bash
+pip install pytest
 pytest tests/
 ```
 
